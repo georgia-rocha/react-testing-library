@@ -10,7 +10,10 @@ describe('Testando Pokedex', () => {
     renderWithRouter(<App />);
     const PokedexText = screen.getByRole('heading', { name: /Encountered Pokémon/i });
     expect(PokedexText).toBeInTheDocument();
+  });
 
+  it('Teste se é exibido o próximo Pokémon da lista quando o botão Próximo Pokémon é clicado', () => {
+    renderWithRouter(<App />);
     const buttonNext = screen.getByRole('button', { name: /Próximo Pokémon/i });
     expect(buttonNext).toBeInTheDocument();
 
@@ -36,6 +39,7 @@ describe('Testando Pokedex', () => {
     const filterButton = screen.getAllByTestId('pokemon-type-button');
 
     filter.forEach((type, index) => {
+      expect(filterButton[index]).toBeInTheDocument();
       expect(filterButton[index]).toHaveTextContent(type);
     });
 
@@ -45,12 +49,19 @@ describe('Testando Pokedex', () => {
 
   it('Teste se a Pokédex contém um botão para resetar o filtro:', () => {
     renderWithRouter(<App />);
+    const buttonNormal = screen.getByRole('button', { name: 'Normal' });
+    expect(buttonNormal).toBeInTheDocument();
+    userEvent.click(buttonNormal);
+
+    const buttonNext = screen.getByRole('button', { name: /Próximo Pokémon/i });
+    expect(buttonNext).toBeInTheDocument();
+    expect(buttonNext).toBeDisabled();
+
     const buttonAll = screen.getByRole('button', { name: 'All' });
     expect(buttonAll).toBeInTheDocument();
     userEvent.click(buttonAll);
 
-    const buttonNext = screen.getByRole('button', { name: /Próximo Pokémon/i });
-    expect(buttonNext).toBeInTheDocument();
+    expect(buttonNext).not.toBeDisabled();
 
     pokemonList.forEach((_pokemon, index) => {
       const nextPokemon = screen.getByTestId('pokemon-name');
