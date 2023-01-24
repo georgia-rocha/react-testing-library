@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import renderWithRouter from '../renderWithRouter';
 import App from '../App';
 
-describe('Testando componente App', () => {
+describe('Testando o App', () => {
   it('Teste se a aplicação é redirecionada para a página home', () => {
     const { history } = renderWithRouter(<App />);
 

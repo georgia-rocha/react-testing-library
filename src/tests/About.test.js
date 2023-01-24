@@ -3,7 +3,7 @@ import { screen } from '@testing-library/react';
 import renderWithRouter from '../renderWithRouter';
 import { About } from '../pages';
 
-describe('Testando componente About', () => {
+describe('Testando a page About', () => {
   const infoAbout = {
     title: 'About Pokédex',
     p1: 'This application simulates a Pokédex, a digital encyclopedia containing all Pokémon',
